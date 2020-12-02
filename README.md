@@ -7,7 +7,7 @@ To install dependencies: `poetry install`
 
 --------------------------------------
 
-*Make sure to edit settings.ini before running!*
+**Make sure to edit settings.ini before running!**
 
 *province field should use proper spelling, i.e. "Ontario", "Alberta"*
 
