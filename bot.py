@@ -21,16 +21,31 @@ def parse_config(path):
     return basic, shipping, billing
 
 
-def mount_driver():
+def mount_driver(options):
     system = platform.system()
     if system == "Windows":
-        driver = webdriver.Chrome(r'./chromedriver/chromedriver.exe')
+        driver = webdriver.Chrome(
+            r'./chromedriver/chromedriver.exe', options=options)
     elif system == "Darwin":
-        driver = webdriver.Chrome(r'./chromedriver/chromedriver-mac')
+        driver = webdriver.Chrome(
+            r'./chromedriver/chromedriver-mac', options=options)
     else:
-        driver = webdriver.Chrome(r'./chromedriver/chromedriver-linux')
+        driver = webdriver.Chrome(
+            r'./chromedriver/chromedriver-linux', options=options)
 
     return driver
+
+
+def obfuscate():
+    option = webdriver.ChromeOptions()
+    option.add_argument('--disable-blink-features=AutomationControlled')
+    option.add_argument("--start-maximized")
+    option.add_argument("--incognito")
+    option.add_argument("--disable-plugins-discovery")
+    option.add_argument('--disable-extensions')
+    option.add_argument('--profile-directory=Default')
+
+    return option
 
 
 def automate(driver, url, basic, shipping, billing):
@@ -142,5 +157,6 @@ if __name__ == "__main__":
     print('Please enter desired Walmart URL')
     url = input('url: ')
 
-    driver = mount_driver()
+    options = obfuscate()
+    driver = mount_driver(options)
     automate(driver, url, basic, shipping, billing)
