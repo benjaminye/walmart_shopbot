@@ -11,5 +11,5 @@ To install dependencies: `poetry install`
 
 *province field should use proper spelling, i.e. "Ontario", "Alberta"*
 
-To run: `poetry run bot.py`
+To run: `poetry run python bot.py`
 
