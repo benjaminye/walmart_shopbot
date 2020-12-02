@@ -36,13 +36,29 @@ def mount_driver():
 def automate(driver, url, basic, shipping, billing):
     driver.get(url)
 
-    element = WebDriverWait(driver, 120).until(EC.presence_of_element_located(
-        (By.XPATH, "/html/body/div[1]/div/div[4]/div/div/div[1]/div[3]/div[2]/div/div[2]/div[2]/div/button[1]")))
+    time.sleep(1)
+    url = driver.current_url
+    if "https://www.walmart.ca/blocked" in url:
+        print('Solve the god damn CAPTCHA, hurry up!')
+
+    while "https://www.walmart.ca/blocked" in url:
+        time.sleep(1)
+        url = driver.current_url
+
+    try:
+        element = WebDriverWait(driver, 5).until(EC.presence_of_element_located(
+            (By.XPATH, r"/html/body/div[1]/div/div[4]/div/div/div[1]/div[4]/div[2]/div/div[2]/div[2]/div/button[1]")))
+        xpath = r"/html/body/div[1]/div/div[4]/div/div/div[1]/div[4]/div[2]/div/div[2]/div[2]/div/button[1]"
+
+    except:
+        element = WebDriverWait(driver, 5).until(EC.presence_of_element_located(
+            (By.XPATH, r"/html/body/div[1]/div/div[4]/div/div/div[1]/div[3]/div[2]/div/div[2]/div[2]/div/button[1]")))
+        xpath = r"/html/body/div[1]/div/div[4]/div/div/div[1]/div[3]/div[2]/div/div[2]/div[2]/div/button[1]"
 
     while not(element.is_enabled()):
         driver.refresh()
         element = WebDriverWait(driver, 120).until(EC.presence_of_element_located(
-            (By.XPATH, "/html/body/div[1]/div/div[4]/div/div/div[1]/div[3]/div[2]/div/div[2]/div[2]/div/button[1]")))
+            (By.XPATH, xpath)))
 
     element.click()
 
