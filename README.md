@@ -13,3 +13,7 @@ To install dependencies: `poetry install`
 
 To run: `poetry run python bot.py`
 
+--------------------------------------
+
+Also Make sure you're running Chrome ver 86.
+If not, replace files in ./chromedriver folder with the current version from: https://chromedriver.chromium.org/downloads
