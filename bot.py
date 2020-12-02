@@ -45,15 +45,18 @@ def automate(driver, url, basic, shipping, billing):
         time.sleep(1)
         url = driver.current_url
 
-    try:
-        element = WebDriverWait(driver, 5).until(EC.presence_of_element_located(
-            (By.XPATH, r"/html/body/div[1]/div/div[4]/div/div/div[1]/div[4]/div[2]/div/div[2]/div[2]/div/button[1]")))
-        xpath = r"/html/body/div[1]/div/div[4]/div/div/div[1]/div[4]/div[2]/div/div[2]/div[2]/div/button[1]"
+    WebDriverWait(driver, 10).until(EC.presence_of_element_located(
+        (By.CLASS_NAME, r"edzik9p0")))
 
-    except:
-        element = WebDriverWait(driver, 5).until(EC.presence_of_element_located(
-            (By.XPATH, r"/html/body/div[1]/div/div[4]/div/div/div[1]/div[3]/div[2]/div/div[2]/div[2]/div/button[1]")))
+    elements = driver.find_elements(
+        By.XPATH, r"/html/body/div[1]/div/div[4]/div/div/div[1]/div[4]/div[2]/div/div[2]/div[2]/div/button[1]")
+    if elements:
+        xpath = r"/html/body/div[1]/div/div[4]/div/div/div[1]/div[4]/div[2]/div/div[2]/div[2]/div/button[1]"
+    else:
         xpath = r"/html/body/div[1]/div/div[4]/div/div/div[1]/div[3]/div[2]/div/div[2]/div[2]/div/button[1]"
+
+    element = WebDriverWait(driver, 5).until(EC.presence_of_element_located(
+        (By.XPATH, xpath)))
 
     while not(element.is_enabled()):
         driver.refresh()
