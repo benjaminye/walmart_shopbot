@@ -1,6 +1,6 @@
 # walmart_shopbot
 
-Make sure you have Poetry installed. Download @ https://python-potry.org/
+Make sure you have Poetry installed. Download @ https://python-poetry.org/
 
 To install dependencies: `poetry install`
 
